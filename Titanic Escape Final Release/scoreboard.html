@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scoreboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script>
+
+             function getData()
+        {
+            let name = sessionStorage.getItem('playerName');
+            let welcome = document.getElementById('welcome');
+            welcome.innerHTML = 'Welcome to titanic escape ' + name + ' !';
+
+        }
+
+    </script>
+    
+</head>
+
+<body>
+    <br>
+    <div style="width:90%;margin-left:5%;margin-right: 5%;">
+        <div class="gameTitleBox">
+            <h1>Escape The Titanic</h1>
+        </div>
+        <div class="gameContentBox" style="width:100%">
+            <br>
+            <h1 style="font-size:40px;text-align: center; color:white">Scoreboard</h1>
+            <br>
+            <hr>
+            
+            <table style="width:60%;margin: 0 auto" id=table>
+                <tr id="firstRow">
+                    <th style="width:60%">
+                        Name
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                </tr>
+            </table>
+            <br>
+            <hr>
+            <br><br>
+        
+            <button id=btn style="display:block; margin:0 auto; width:20%;" onclick="replay()">Return To Menu</button>
+            <br>
+        </div>
+        
+        <script>
+
+        let num = sessionStorage.getItem("finalScore");
+        let str = sessionStorage.getItem("playerName");
+        let table = document.getElementById("table");
+        let details = [
+            [num, str]
+        ];
+        let scoreboard;
+
+            
+         window.onload = addToScoreboard();   
+         
+            
+        function getScore() {
+            return JSON.parse(localStorage.getItem("nums"));
+        }
+
+
+        function updateBoard(scoreboard) {
+           localStorage.setItem("nums", JSON.stringify(scoreboard));
+        }
+
+
+        function addToScoreboard() {
+            scoreboard = getScore();
+            if (scoreboard == null) {
+                scoreboard = Array();
+                scoreboard.push(details);
+                updateBoard(scoreboard);
+            } else {
+                scoreboard.push(details);
+                updateBoard(scoreboard);
+            }
+            console.log(getScore());
+            console.log(getScore().length);
+            displayScores();
+      
+        }
+
+        function displayScores() {
+            let row;
+            let cell1;
+            let cell2;
+            for (let i = 0; i < getScore().length; i++) 
+            {
+                row = table.insertRow();
+
+                cell1 = row.insertCell(0);
+                cell2 = row.insertCell(0);
+                let s = document.createTextNode(getScore()[i][0][0]);
+                let a = document.createTextNode(getScore()[i][0][1]);
+                cell1.appendChild(s);
+                cell2.appendChild(a);
+            }
+        }
+                        
+
+        function clearArray() {
+            localStorage.removeItem("nums");
+            localStorage.clear;
+            scoreboard = getScore();
+            if (scoreboard == null) {
+                console.log("scoreboard cleared");
+            } else {
+                console.log("scoreboard not cleared");
+                console.log(scoreboard);
+            }
+
+        } document.getElementById("replay").addEventListener("click", replay);
+
+            function replay(){
+                window.location.assign("Menu_Titanic.html");
+            }
+        </script>
+        
+        <script type="text/javascript" src="js/game.js"></script>
+
+    </div>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Titanic Escape</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" href="img/favicon.jpg">
+
+    <script>
+        
+        function getData() 
+        {
+            let name = sessionStorage.getItem('playerName');
+            if(name == null)
+                {
+                    name = "player"
+                }
+            let age = sessionStorage.getItem('playerAge');
+            let contrast = sessionStorage.getItem('contrastMode');
+            let fontChange = sessionStorage.getItem('fontSize');
+            let fontSize = document.getElementById('text');
+            if(contrast == 'true')
+                {
+                    changeCSS('css/styleContrast.css', 0);
+                }
+            else 
+                {
+                    changeCSS('css/style.css', 0);
+                }
+            
+            if(fontChange == 'true')
+                {
+                    fontSize.style.fontSize = '20px';
+                }
+            else 
+                {
+                    fontSize.style.fontSize = '16px';
+                }
+            
+            let welcome = document.getElementById('welcome');
+            welcome.innerHTML = 'Welcome to titanic escape ' + name + ' !';
+        }
+
+        function changeCSS(cssFile, cssLinkIndex) {
+
+            var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
+
+            var newlink = document.createElement("link");
+            newlink.setAttribute("rel", "stylesheet");
+            newlink.setAttribute("type", "text/css");
+            newlink.setAttribute("href", cssFile);
+
+           document.getElementsByTagName("head").item(cssLinkIndex).replaceChild(newlink, oldlink);
+        }
+        
+    </script>
+</head>
+
+<body onload='getData();'>
+
+    <div id=BGOverlay>
+        <br><br>
+        <div class="gameBox">
+            <div class="gameTitleBox">
+                <h1>Escape The Titanic</h1>
+            </div>
+            <div class="gameContentBox">
+                <br>
+                <div id=imageBox>
+                    <img class="gameImg" id="gameImg" src="img/cabin.jpg">
+                </div>
+                <div class="gameConsole" id=text>
+                    <p id="welcome"></p>
+                    <p>If at any stage in the game you are stuck please enter /help into the commands for a guide!</p>
+
+                </div>
+                <div>
+                    <input class="gameInput" id="input" placeholder="Enter command e.g head north">
+
+                    <button onclick="play();" id="btn">Enter</button>
+                </div>
+
+            </div>
+
+            <div class="statContainer">
+                Time:
+                <span id="time">0</span>
+                Score:
+                <span id="score">0</span>
+                Count:
+                <span id="count">0</span>
+            </div>
+            
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="js/game.js"></script>
+            
+        </div>
+
+    </div>
+</body></html>

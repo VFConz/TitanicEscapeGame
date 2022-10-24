@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+
+
+    <style type="text/css">
+        * {
+            text-align: center;
+        }
+
+        body {
+            background-image: url("img/stock.jpg");
+            background-size: auto;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 10%;
+            color: white;
+        }
+
+        button {
+            width: 30%;
+            margin: 20px;
+            font-size: 50px;
+            border-radius: 10%;
+        }
+
+        audio {
+            width: 100%;
+            text-align: left;
+        }
+
+        p {
+            font-family: sans-serif;
+            font-weight: bolder;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        button:hover {
+            background-color: red;
+        }
+
+        #title {
+            font-family: 'cutlass_roughregular', Arial, sans-serif;
+            font-size: 9em;
+            text-shadow: 10px;
+            font-stretch: expanded;
+            text-align: center;
+            display: inline;
+            background: -webkit-linear-gradient(#eee, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: aliceblue;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        #titleBox {
+            display: inline-block;
+            margin-left: 40%;
+            padding-top: 50px;
+            margin: 0% auto;
+            background-color: #2e2e2e;
+            border-style: inset;
+            border-width: 5px;
+            height: 200px;
+            border-color: aliceblue;
+            border-radius: 40px;
+        }
+
+        input {
+            border-radius: 2cm;
+            border: 1px dashed #000000;
+        }
+
+
+        input:focus {
+            background-color: yellow;
+        }
+
+        .container {
+            background-color: black;
+            width: 90%;
+            padding-top: 10px;
+            border-radius: 40px;
+            border-style: solid;
+            margin: 0% auto;
+            margin-top: 15px;
+
+        }
+
+        .errorMsg {
+            color: red;
+            display: contents;
+        }
+
+        .errorValid {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <audio autoplay loop src="sound/seagulls.mp3"></audio>
+
+    <div id="titleBox">
+        <h1 id="title">Escape The Titanic</h1>
+
+    </div>
+    <div class="container">
+
+        <p id="welcome">
+            You wake up to the sound of a scream and notice a note has been slipped under your door, you decide to pick it up...
+        </p>
+
+
+        <hr>
+        <br>
+
+        <form>
+            <label for="inputName">Name:</label>
+            <input id="inputName" type="text" placeholder="Enter name...">
+            <br>
+            <span id="errName" class="errorValid">Name is invalid</span>
+            <br><br>
+
+            <label for="inputAge">Age:</label>
+            <input id="inputAge" type="text" placeholder="Enter age...">
+            <br>
+            <span id="errAge" class="errorValid">Age is invalid</span>
+            <br><br>
+            <input type="checkbox" id="contrastMode" name="accessability">
+            <label for="contrastMode">High Contrast Mode</label>
+
+
+            <input type="checkbox" id="fontSize" name="accessability">
+            <label for="fontSize">Large Font Size</label>
+
+        </form>
+
+        <button id="btn" onclick="sendData(); ">Start</button>
+
+        <br>
+    </div>
+    <br><br>
+
+    <script>
+        function sendData() {
+            
+            let gameStart = new Audio("audio/whistle.mp3");
+            gameStart.volume = 1.0;
+            
+           
+
+            let name = document.getElementById('inputName').value;
+
+            let age = document.getElementById('inputAge').value;
+
+            let isValid = true;
+
+            if (name == "" || name.length > 13) {
+                isValid = false;
+                document.getElementById("errName").className = "errorMsg";
+            }
+            else {
+                document.getElementById("errName").className = "errorValid";
+            }
+
+            if (age < 1 || age > 150 || !(Number.isInteger(parseInt(age)))) {
+                
+                isValid = false;
+                
+                document.getElementById("errAge").className = "errorMsg";
+            }
+        
+             else {
+                document.getElementById("errAge").className = "errorValid";
+            }
+
+            if (isValid == true) {
+                sessionStorage.setItem('playerName', name);
+
+                sessionStorage.setItem('playerAge', age);
+
+
+                //accessability features return true or false
+
+                let contrast = document.getElementById('contrastMode');
+                sessionStorage.setItem('contrastMode', contrast.checked);
+
+
+                let fontChange = document.getElementById('fontSize');
+                sessionStorage.setItem('fontSize', fontChange.checked);
+
+                window.location.assign('index.html');
+                
+                 gameStart.play();
+
+            }
+            
+        }
+    </script>
+
+</body></html>

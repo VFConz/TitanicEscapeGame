@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bad Ending: Shame!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/stylebadending.css">
+</head>
+
+<body onload='getData();'>
+
+    <div class="gameBox">
+        <div class="gameTitleBox">
+            <h1>Escape The Titanic</h1>
+        </div>
+        <div class="gameContentBox">
+            <div id="endingFont"> BAD ENDING </div>
+            <img class=gameImg src="img/badEnd.png" style="border-radius:15px;">
+
+            <div class=endingDesc>
+                <p style="color:antiquewhite;font-size:20px;padding-top:30px;padding-left:10px;padding-right:10px;text-align:center;">
+                    You are too slow! Try to be quicker next time!
+                </p>
+                <br>
+                <p id=endingFont style="font-size:40px; padding-bottom: 10px;">Fail!</p>
+                <p id=endingFont style="font-size:30px;">Your Score is </p>
+                <div id=endingScore>
+                    
+                </div>
+            </div>
+
+
+            <div style="text-align: center; margin-bottom:10px;">
+                <button id=replay onclick="toReplay()">Replay</button>
+                
+                <button id=scoreboard onclick="toScoreboard()" style="width:180px">Go To Scoreboard</button>
+            </div>
+           
+
+
+        </div>
+        
+    <script>
+        function getData() {
+            let name = sessionStorage.getItem('playerName');
+            let finalScore = sessionStorage.getItem('finalScore');
+            let score = document.getElementById('endingScore');
+            score.innerHTML += finalScore;
+        }
+        
+        
+        function toScoreboard(){
+            window.location.assign("scoreboard.html");
+        }
+        
+        function toReplay(){
+            window.location.assign("Menu_Titanic.html");
+        }
+
+    </script>
+        <script type="text/javascript" src="js/game.js"></script>
+    </div>
+
+
+</body></html>
